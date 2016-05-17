@@ -3,11 +3,11 @@ import java.util.ArrayList;
 /**
  * Created by hongjiayong on 16/5/16.
  */
-public class firstAdapter {
+public class bestAdapter {
     public ArrayList<memryBlock> table;
     public ArrayList<Integer> tags;
 
-    public firstAdapter(){
+    public bestAdapter(){
         table = new ArrayList<memryBlock>();
         tags = new ArrayList<Integer>();
         memryBlock blank = new memryBlock(0, 640, 640, 0);
@@ -17,33 +17,40 @@ public class firstAdapter {
     }
 
     public void putIn(int lenth, int tag){
+        int min = 10000;
+        int chose = 0;
         for (int i = 0; i < table.size(); i++){
-            // enable
-            if(!table.get(i).getMemState() && table.get(i).getLenth() >= lenth){
-                memryBlock temp = table.get(i);
-                memryBlock newMem = new memryBlock(temp.getStart(), temp.getStart() + lenth, lenth, tag);
-                temp.setStart(temp.getStart() + lenth);
-                temp.setLenth(temp.getLenth() - lenth);
-                table.add(i, newMem);
-                tags.add(i);
-                break;
-            }
-            // unable
-            if (i == table.size() - 1){
-                System.out.println("short of memery!");
+            if (!table.get(i).getMemState() && table.get(i).getLenth() >= lenth){
+                if (min > table.get(i).getLenth()){
+                    min = table.get(i).getLenth();
+                    chose = i;
+                }
             }
         }
+        // unable
+        if (min == 10000){
+            ui.board.append("Put in fail! short of memery!\n");
+            return;
+        }
+        // enable
+        memryBlock temp = table.get(chose);
+        memryBlock newMem = new memryBlock(temp.getStart(), temp.getStart() + lenth, lenth, tag);
+        temp.setStart(temp.getStart() + lenth);
+        temp.setLenth(temp.getLenth() - lenth);
+        table.add(chose, newMem);
+        tags.add(chose);
+        ui.board.append("Put in successful!\n");
     }
 
     public void releaseMem(int tag){
         try {
             if(tags.get(tag) == -1){
-                System.out.println("Has been released!");
+                ui.board.append("作业" + tag + ": Has been released!\n");
                 return;
             }
             tags.set(tag, -1);
         }catch (RuntimeException e){
-            System.out.println("No such memery block!");
+            ui.board.append("No such memery block!");
             return;
         }
         for (int i = 0; i < table.size(); i++){
@@ -51,8 +58,9 @@ public class firstAdapter {
                 memryBlock temp = table.get(i);
                 // left and right both are true
                 if((i == 0 && table.get(1).getMemState()) || (i == table.size() - 1 && table.get(i - 1).getMemState())
-                        || (table.get(i - 1).getMemState() && table.get(i).getMemState())){
+                        || (i > 0 && table.get(i - 1).getMemState() && table.get(i).getMemState())){
                     temp.setMemState(false);
+                    ui.board.append("作业" + tag + ": Released successful!\n");
                     break;
                 }else{
                     // left is false
@@ -60,6 +68,7 @@ public class firstAdapter {
                         temp.setStart(table.get(i - 1).getStart());
                         temp.setLenth(temp.getLenth() + table.get(i - 1).getLenth());
                         temp.setMemState(false);
+                        ui.board.append("作业" + tag + ": Released successful!\n");
                         table.remove(i - 1);
                         i--;
                     }
@@ -68,6 +77,7 @@ public class firstAdapter {
                         temp.setEnd(table.get(i + 1).getEnd());
                         temp.setLenth(temp.getLenth() + table.get(i + 1).getLenth());
                         temp.setMemState(false);
+                        ui.board.append("作业" + tag + ": Released successful!\n");
                         table.remove(i + 1);
                     }
                 }

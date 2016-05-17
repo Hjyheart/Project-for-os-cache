@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/动态内存分配.iml" filepath="$PROJECT_DIR$/动态内存分配.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Os2.iml" filepath="$PROJECT_DIR$/Os2.iml" />
     </modules>
   </component>
 </project>
