@@ -151,6 +151,7 @@ public class bestAdapter {
 - 最下方空白出将显示内存块情况
 ### UI展示
 ![demo](https://github.com/Hjyheart/os-project-cache/blob/master/Os2/demo.png?raw=true)
+
 ## 请求调页存储管理方式模拟
 ### 项目需求
     假设每个页面可存放10条指令，分配给一个作业的内存块为4。模拟一个作业的执行过程，
