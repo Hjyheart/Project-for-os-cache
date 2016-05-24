@@ -147,6 +147,7 @@ public class bestAdapter {
 - 左侧自动演示按钮可以自动演示所有操作
 - 右侧单步操作按钮可以进行单步演示
 - 最下方空白出将显示内存块情况
+
 ### UI展示
 ![demo](https://github.com/Hjyheart/os-project-cache/blob/master/Os2/demo.png?raw=true)
 
@@ -223,5 +224,6 @@ public class bloks {
 - 顶部多选按钮可以选择算法
 - 下方start按钮可以使程序开始运作
 - 下方文本框用于显示操作结果
+
 ### UI展示
 ![demo2](https://github.com/Hjyheart/os-project-cache/blob/master/Os2_2/demo.png?raw=true)
